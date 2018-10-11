@@ -68,7 +68,7 @@
         android:background="@drawable/biz_plugin_weather_shenzhen_bg"
         android:orientation="vertical">
 
-        <!-- 今日天气信息 -->
+        <!-- 当前天气信息 -->
         <RelativeLayout
             android:id="@+id/weather_today"
             android:layout_width="wrap_content"
