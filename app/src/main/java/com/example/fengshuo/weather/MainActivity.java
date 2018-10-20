@@ -1,6 +1,7 @@
 package com.example.fengshuo.weather;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     private ImageView mUpdateBtn;
 
+    private ImageView mCitySelect;
+
     private TextView cityTv,timeTv,humidityTv,weekTv,pmDataTv,pmQualityTv,
             temperatureTv,climateTv,windTv,city_name_Tv,nowTv;
     private ImageView weatherImg,pmImg;
@@ -69,6 +72,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
             Log.d("myWeather","网络挂了");
             Toast.makeText(MainActivity.this,"网络挂了！",Toast.LENGTH_LONG).show();
         }
+
+        mCitySelect=(ImageView) findViewById(R.id.title_city_manager);
+        mCitySelect.setOnClickListener(this);
+
         initView();
 
     }
@@ -102,21 +109,27 @@ public class MainActivity extends Activity implements View.OnClickListener{
         String low=sharedPreferences.getString("low","N/A");
         String type=sharedPreferences.getString("type","N/A");
 
-        city_name_Tv.setText(city);
+        city_name_Tv.setText(city+"天气");
         cityTv.setText(city);
-        timeTv.setText(updatetime);
-        humidityTv.setText(shidu);
+        timeTv.setText(updatetime+"发布");
+        humidityTv.setText("湿度："+shidu);
         pmDataTv.setText(pm25);
         pmQualityTv.setText(quality);
         weekTv.setText(date);
         temperatureTv.setText(high+"~"+low);
         climateTv.setText(type);
-        windTv.setText(fengli);
-        nowTv.setText(wendu);
+        windTv.setText("风力："+fengli);
+        nowTv.setText("温度："+wendu);
     }
 
     @Override
     public void onClick(View view){
+
+        if(view.getId()==R.id.title_city_manager){
+            Intent i=new Intent(this,SelectCity.class);
+            startActivity(i);
+        }
+
         if (view.getId()==R.id.title_update_btn){
             SharedPreferences sharedPreferences=getSharedPreferences("config",MODE_PRIVATE);
             String cityCode=sharedPreferences.getString("main_city_code","101010100");
@@ -255,14 +268,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
                             case "high":
                                 if (highCount==0){
                                     eventType=xmlPullParser.next();
-                                    todayWeather.setHigh(xmlPullParser.getText());
+                                    todayWeather.setHigh(xmlPullParser.getText().substring(2).trim());
                                 }
                                 highCount++;
                                 break;
                             case "low":
                                 if (lowCount==0){
                                     eventType=xmlPullParser.next();
-                                    todayWeather.setLow(xmlPullParser.getText());
+                                    todayWeather.setLow(xmlPullParser.getText().substring(2).trim());
                                 }
                                 lowCount++;
                                 break;
@@ -293,8 +306,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         cityTv.setText(todayWeather.getCity());
         timeTv.setText(todayWeather.getUpdatetime()+"发布");
         humidityTv.setText("湿度："+todayWeather.getShidu());
+        nowTv.setText("温度："+todayWeather.getWendu());
         pmDataTv.setText(todayWeather.getPm25());
-        pmQualityTv.setText(todayWeather.getPm25());
+        pmQualityTv.setText(todayWeather.getQuality());
         weekTv.setText(todayWeather.getDate());
         temperatureTv.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
         climateTv.setText(todayWeather.getType());
