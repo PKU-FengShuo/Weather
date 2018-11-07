@@ -38,10 +38,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/head">
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:layout_margin="15.0dip"
+            android:background="@drawable/contact_search_box_edittext_keyword_background"
+            android:drawableLeft="@drawable/magnifying_glass"
+            android:drawablePadding="10.0dip"
+            android:hint="搜索全国城市（中文）"
+            android:paddingBottom="14.0dp"
+            android:paddingLeft="15.0dp"
+            android:paddingRight="30.0dp"
+            android:paddingTop="15.0dp"
+            android:singleLine="true"
+            android:textColor="#ff000000"
+            android:textColorHint="#ffcccccc"
+            />
+
         <ListView
             android:id="@+id/list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_below="@+id/search_edit"
+            android:choiceMode="singleChoice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
         </ListView>
     </RelativeLayout>
 
