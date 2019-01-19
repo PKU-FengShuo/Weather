@@ -204,6 +204,7 @@
 
         <!-- 今日天气信息块 -->
         <RelativeLayout
+            android:id="@+id/today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/weather_today"
@@ -268,7 +269,46 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_marginTop="20.0dip"
+            android:layout_below="@+id/today"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="40dip"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:layout_width="10dip"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/page1Img"
+                    android:src="@drawable/point_enable"
+                    />
+                <ImageView
+                    android:layout_width="10dip"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/page1Img"
+                    android:layout_marginLeft="5dip"
+                    android:id="@+id/page2Img"
+                    android:src="@drawable/point_disable"
+                    />
 
+            </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
+
+
 
 </RelativeLayout>
