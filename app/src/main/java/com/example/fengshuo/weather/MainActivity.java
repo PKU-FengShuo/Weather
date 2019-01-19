@@ -702,6 +702,49 @@ public class MainActivity extends Activity implements View.OnClickListener,ViewP
         return todayWeather;
     }
 
+    void weatherImage(String climate,ImageView weatherImg){
+        if(climate.equals("暴雪"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_baoxue);
+        if(climate.equals("暴雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_baoyu);
+        if(climate.equals("大暴雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_dabaoyu);
+        if(climate.equals("大雪"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_daxue);
+        if(climate.equals("大雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_dayu);
+        if(climate.equals("多云"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_duoyun);
+        if(climate.equals("雷阵雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_leizhenyu);
+        if(climate.equals("雷阵雨冰雹"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_leizhenyubingbao);
+        if(climate.equals("晴"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_qing);
+        if(climate.equals("沙尘暴"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_shachenbao);
+        if(climate.equals("特大暴雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_tedabaoyu);
+        if(climate.equals("雾"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_wu);
+        if(climate.equals("小雪"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_xiaoxue);
+        if(climate.equals("小雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_xiaoyu);
+        if(climate.equals("阴"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_yin);
+        if(climate.equals("雨夹雪"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_yujiaxue);
+        if(climate.equals("阵雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhenyu);
+        if(climate.equals("阵雪"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhenxue);
+        if(climate.equals("中雪"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhongxue);
+        if(climate.equals("中雨"))
+            weatherImg.setImageResource(R.drawable.biz_plugin_weather_zhongyu);
+    }
+
     void updateTodayWeather(TodayWeather todayWeather){
         city_name_Tv.setText(todayWeather.getCity()+"天气");
         cityTv.setText(todayWeather.getCity());
@@ -714,6 +757,22 @@ public class MainActivity extends Activity implements View.OnClickListener,ViewP
         temperatureTv.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
         climateTv.setText(todayWeather.getType());
         windTv.setText("风力："+todayWeather.getFengli());
+
+        if(todayWeather.getPm25()!=null){
+            int pm2_5=Integer.parseInt(todayWeather.getPm25());
+            if(pm2_5<=50) pmImg.setImageResource(R.drawable.biz_plugin_weather_0_50);
+            if(pm2_5>50&&pm2_5<=100) pmImg.setImageResource(R.drawable.biz_plugin_weather_51_100);
+            if(pm2_5>100&&pm2_5<=150) pmImg.setImageResource(R.drawable.biz_plugin_weather_101_150);
+            if(pm2_5>150&&pm2_5<=200) pmImg.setImageResource(R.drawable.biz_plugin_weather_151_200);
+            if(pm2_5>200&&pm2_5<=300) pmImg.setImageResource(R.drawable.biz_plugin_weather_201_300);
+            if(pm2_5>300) pmImg.setImageResource(R.drawable.biz_plugin_weather_greater_300);
+        }
+
+        weatherImage(todayWeather.getType(),weatherImg);
+        weatherImage(todayWeather.getTomorrow1_type(),weatherImg1);
+        weatherImage(todayWeather.getTomorrow2_type(),weatherImg2);
+        weatherImage(todayWeather.getTomorrow3_type(),weatherImg3);
+        weatherImage(todayWeather.getTomorrow4_type(),weatherImg4);
 
         //--------------------更新ViewPager--------------------
 
